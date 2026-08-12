@@ -33,6 +33,7 @@ body {
   font-family: "Space Mono", monospace;
   line-height: 1.7;
   letter-spacing: 0.02em;
+  transition: opacity 150ms ease;
 }
 
 img {
@@ -363,6 +364,11 @@ body.is-fading #ouroboros {
   .content-page {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .page-title {
+    letter-spacing: 0.06em;
+    line-height: 1.25;
   }
 
   .skill-row {
