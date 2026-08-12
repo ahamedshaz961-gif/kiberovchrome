@@ -1,93 +1,110 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const body = document.body;
+document.addEventListener('DOMContentLoaded', () =>
+{
+const body = document.body;
 
-  document.querySelectorAll('a[href]').forEach((link) => {
-    const href = link.getAttribute('href');
+document.querySelectorAll('a[href]').forEach((link) =>
+{
+const href = link.getAttribute('href');
 
-    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('http')) {
-      return;
-    }
+if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('http'))
+{
+return;
+}
 
-    link.addEventListener('click', (event) => {
-      const page = window.location.pathname.split('/').pop() || 'index.html';
+link.addEventListener('click', (e) =>
+{
+const page = window.location.pathname.split('/').pop() || 'index.html';
 
-      if (href === page) {
-        return;
-      }
+if (href === page)
+{
+return;
+}
 
-      event.preventDefault();
-      body.classList.add('is-fading');
-      window.setTimeout(() => {
-        window.location.href = href;
-      }, 150);
-    });
-  });
+e.preventDefault();
+body.classList.add('is-fading');
 
-  const oro = document.getElementById('ouroboros');
+window.setTimeout(() =>
+{
+window.location.href = href;
+}, 150);
+});
+});
 
-  if (!oro) {
-    return;
-  }
+const oro = document.getElementById('ouroboros');
 
-  const pos = {
-    x: window.innerWidth * 0.3,
-    y: window.innerHeight * 0.25,
-    vx: 1.2,
-    vy: 0.95,
-    rot: 0,
-    speed: 1.4
-  };
+if (!oro)
+{
+return;
+}
 
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+const pos =
+{
+x: window.innerWidth * 0.3,
+y: window.innerHeight * 0.25,
+vx: 1.2,
+vy: 0.95,
+rot: 0,
+speed: 1.4
+};
 
-  const fitOro = () => {
-    const size = clamp(window.innerWidth * 0.085, 46, 70);
-    oro.style.width = `${size}px`;
+const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-    const maxX = Math.max(0, window.innerWidth - oro.offsetWidth);
-    const maxY = Math.max(0, window.innerHeight - oro.offsetHeight);
+const fitOro = () =>
+{
+const size = clamp(window.innerWidth * 0.085, 46, 70);
+oro.style.width = `${size}px`;
 
-    pos.x = clamp(pos.x, 0, maxX);
-    pos.y = clamp(pos.y, 0, maxY);
-  };
+const maxX = Math.max(0, window.innerWidth - oro.offsetWidth);
+const maxY = Math.max(0, window.innerHeight - oro.offsetHeight);
 
-  const drawOro = () => {
-    oro.style.transform = `translate(${pos.x}px, ${pos.y}px) rotate(${pos.rot}deg)`;
+pos.x = clamp(pos.x, 0, maxX);
+pos.y = clamp(pos.y, 0, maxY);
+};
 
-    const img = oro.querySelector('img');
-    if (img) {
-      img.style.transform = `rotate(${pos.rot * -0.35}deg)`;
-    }
-  };
+const drawOro = () =>
+{
+oro.style.transform = `translate(${pos.x}px, ${pos.y}px) rotate(${pos.rot}deg)`;
 
-  const tick = () => {
-    const maxX = Math.max(0, window.innerWidth - oro.offsetWidth);
-    const maxY = Math.max(0, window.innerHeight - oro.offsetHeight);
+const img = oro.querySelector('img');
 
-    pos.x += pos.vx;
-    pos.y += pos.vy;
-    pos.rot += pos.speed;
+if (img)
+{
+img.style.transform = `rotate(${pos.rot * -0.35}deg)`;
+}
+};
 
-    if (pos.x <= 0 || pos.x >= maxX) {
-      pos.vx *= -1;
-      pos.x = clamp(pos.x, 0, maxX);
-    }
+const tick = () =>
+{
+const maxX = Math.max(0, window.innerWidth - oro.offsetWidth);
+const maxY = Math.max(0, window.innerHeight - oro.offsetHeight);
 
-    if (pos.y <= 0 || pos.y >= maxY) {
-      pos.vy *= -1;
-      pos.y = clamp(pos.y, 0, maxY);
-    }
+pos.x += pos.vx;
+pos.y += pos.vy;
+pos.rot += pos.speed;
 
-    drawOro();
-    requestAnimationFrame(tick);
-  };
+if (pos.x <= 0 || pos.x >= maxX)
+{
+pos.vx *= -1;
+pos.x = clamp(pos.x, 0, maxX);
+}
 
-  fitOro();
-  drawOro();
-  requestAnimationFrame(tick);
+if (pos.y <= 0 || pos.y >= maxY)
+{
+pos.vy *= -1;
+pos.y = clamp(pos.y, 0, maxY);
+}
 
-  window.addEventListener('resize', () => {
-    fitOro();
-    drawOro();
-  });
+drawOro();
+requestAnimationFrame(tick);
+};
+
+fitOro();
+drawOro();
+requestAnimationFrame(tick);
+
+window.addEventListener('resize', () =>
+{
+fitOro();
+drawOro();
+});
 });
