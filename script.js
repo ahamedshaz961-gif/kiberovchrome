@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const pos = {
     x: window.innerWidth * 0.3,
     y: window.innerHeight * 0.25,
-    vx: 0.8,
-    vy: 0.65,
+    vx: 1.2,
+    vy: 0.95,
     rot: 0,
-    speed: 0.9
+    speed: 1.4
   };
 
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
