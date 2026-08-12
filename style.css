@@ -1,31 +1,20 @@
 :root {
-  --sand-base: #d8bc8b;
+  --sand: #d8bc8b;
   --sand-soft: #e6d3a8;
-  --sand-stone: #b89263;
-  --sand-deep: #9c794d;
-  --tan: #c79a63;
-  --brown: #4a3425;
-  --brown-strong: #2d1f18;
   --ink: #1d120d;
   --ink-soft: rgba(29, 18, 13, 0.78);
   --line: rgba(55, 37, 25, 0.7);
-  --panel: rgba(84, 60, 40, 0.08);
-  --panel-strong: rgba(67, 48, 33, 0.18);
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
   min-height: 100vh;
   color: var(--ink);
-  background-color: var(--sand-base);
+  background-color: var(--sand);
   background-image: url("assets/sand.png");
   background-repeat: repeat;
   background-size: auto;

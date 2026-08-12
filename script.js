@@ -2,96 +2,92 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
 
   document.querySelectorAll('a[href]').forEach((link) => {
-    const target = link.getAttribute('href');
+    const href = link.getAttribute('href');
 
-    if (!target || target.startsWith('#') || target.startsWith('mailto:') || target.startsWith('http')) {
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('http')) {
       return;
     }
 
     link.addEventListener('click', (event) => {
-      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const page = window.location.pathname.split('/').pop() || 'index.html';
 
-      if (link.getAttribute('href') === currentPage) {
+      if (href === page) {
         return;
       }
 
       event.preventDefault();
       body.classList.add('is-fading');
       window.setTimeout(() => {
-        window.location.href = target;
+        window.location.href = href;
       }, 150);
     });
   });
 
-  const ouroboros = document.getElementById('ouroboros');
+  const oro = document.getElementById('ouroboros');
 
-  if (!ouroboros) {
+  if (!oro) {
     return;
   }
 
-  const state = {
+  const pos = {
     x: window.innerWidth * 0.3,
     y: window.innerHeight * 0.25,
     vx: 0.8,
     vy: 0.65,
-    rotation: 0,
+    rot: 0,
     speed: 0.9
   };
 
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-  const updateOuroborosSize = () => {
+  const fitOro = () => {
     const size = clamp(window.innerWidth * 0.085, 46, 70);
-    ouroboros.style.width = `${size}px`;
+    oro.style.width = `${size}px`;
+
+    const maxX = Math.max(0, window.innerWidth - oro.offsetWidth);
+    const maxY = Math.max(0, window.innerHeight - oro.offsetHeight);
+
+    pos.x = clamp(pos.x, 0, maxX);
+    pos.y = clamp(pos.y, 0, maxY);
   };
 
-  const updateBounds = () => {
-    const maxX = Math.max(0, window.innerWidth - ouroboros.offsetWidth);
-    const maxY = Math.max(0, window.innerHeight - ouroboros.offsetHeight);
+  const drawOro = () => {
+    oro.style.transform = `translate(${pos.x}px, ${pos.y}px) rotate(${pos.rot}deg)`;
 
-    state.x = clamp(state.x, 0, maxX);
-    state.y = clamp(state.y, 0, maxY);
-  };
-
-  const render = () => {
-    ouroboros.style.transform = `translate(${state.x}px, ${state.y}px) rotate(${state.rotation}deg)`;
-    const img = ouroboros.querySelector('img');
-
+    const img = oro.querySelector('img');
     if (img) {
-      img.style.transform = `rotate(${state.rotation * -0.35}deg)`;
+      img.style.transform = `rotate(${pos.rot * -0.35}deg)`;
     }
   };
 
-  const animate = () => {
-    const maxX = Math.max(0, window.innerWidth - ouroboros.offsetWidth);
-    const maxY = Math.max(0, window.innerHeight - ouroboros.offsetHeight);
+  const tick = () => {
+    const maxX = Math.max(0, window.innerWidth - oro.offsetWidth);
+    const maxY = Math.max(0, window.innerHeight - oro.offsetHeight);
 
-    state.x += state.vx;
-    state.y += state.vy;
-    state.rotation += state.speed;
+    pos.x += pos.vx;
+    pos.y += pos.vy;
+    pos.rot += pos.speed;
 
-    if (state.x <= 0 || state.x >= maxX) {
-      state.vx *= -1;
-      state.x = clamp(state.x, 0, maxX);
+    if (pos.x <= 0 || pos.x >= maxX) {
+      pos.vx *= -1;
+      pos.x = clamp(pos.x, 0, maxX);
     }
 
-    if (state.y <= 0 || state.y >= maxY) {
-      state.vy *= -1;
-      state.y = clamp(state.y, 0, maxY);
+    if (pos.y <= 0 || pos.y >= maxY) {
+      pos.vy *= -1;
+      pos.y = clamp(pos.y, 0, maxY);
     }
 
-    render();
-    requestAnimationFrame(animate);
+    drawOro();
+    requestAnimationFrame(tick);
   };
 
-  updateOuroborosSize();
-  updateBounds();
-  render();
-  requestAnimationFrame(animate);
+  fitOro();
+  drawOro();
+  requestAnimationFrame(tick);
 
   window.addEventListener('resize', () => {
-    updateOuroborosSize();
-    updateBounds();
-    render();
+    fitOro();
+    drawOro();
   });
 });
