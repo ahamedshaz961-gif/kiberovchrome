@@ -35,4 +35,4 @@ https://ahamedshaz961-gif.github.io/kiberovchrome/
 
 ## Status
 
-v1 — complete
+v2 — complete
