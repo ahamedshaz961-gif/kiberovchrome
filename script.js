@@ -51,7 +51,7 @@ const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 const fitOro = () =>
 {
-const size = clamp(window.innerWidth * 0.085, 46, 70);
+const size = clamp(window.innerWidth * 0.085, 46, 130);
 oro.style.width = `${size}px`;
 
 const maxX = Math.max(0, window.innerWidth - oro.offsetWidth);
