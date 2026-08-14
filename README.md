@@ -35,11 +35,11 @@ https://ahamedshaz961-gif.github.io/kiberovchrome/
 
 ## Running locally
 
-Clone or download this repository.
-Open the project folder.
-Open index.html in a web browser.
+* Clone or download this repository.
+* Open the project folder.
+* Open index.html in a web browser.
 
-No dependencies or build tools are required.
+** No dependencies or build tools are required. **
 
 The site uses Google Fonts, so an internet connection is needed for the intended fonts to load.
 
