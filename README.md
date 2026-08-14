@@ -33,7 +33,8 @@ KIBEROVCHROME is my personal website and a place to put some of the things I bui
 
 https://ahamedshaz961-gif.github.io/kiberovchrome/
 
-Running locally
+## Running locally
+
 Clone or download this repository.
 Open the project folder.
 Open index.html in a web browser.
